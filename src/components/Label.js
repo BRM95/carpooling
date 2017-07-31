@@ -14,7 +14,7 @@
   }
 
   const styles = StyleSheet.create({
-    textLabel{
+    textLabel : {
        fontSize: 20,
        fontWeight: 'bold',
        fontFamily: 'Verdana',
