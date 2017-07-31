@@ -20,6 +20,7 @@ import Register from './src/pages/Register';
 import passengerMap from './src/pages/passengerMap';
 
 import stackNav from './src/navigation/stackNav';
+import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu';
 
 const CustomDrawerContentComponent = (props) => (
   <Drawer theme='light'>
@@ -102,27 +103,22 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 
-const Carpooling = () => (
-  DrawerNavigator({
-      DrawerItem1: {
-          screen: stackNav,
-          navigationOptions: {
-              drawer: {
-                  label: 'Drawer 1',
-                  icon: ({ tintColor }) => <Icon name="rocket" size={24} />
-              },
-          },
-      },
-  },
-  {
-    contentComponent: CustomDrawerContentComponent,
-    drawerPosition: 'left'
-  })
-  <MenuContext style={{ flex: 1 }}>
-    <TopNavigation/>
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Hello!</Text></View>
-  </MenuContext>
-);
+const Carpooling = DrawerNavigator({
+  DrawerItem1: {
+        screen: stackNav,
+        navigationOptions: {
+            drawer: {
+                label: 'Drawer 1',
+                icon: ({ tintColor }) => <Icon name="rocket" size={24} />
+            },
+        },
+    },
+},
+{
+  contentComponent: CustomDrawerContentComponent,
+  drawerPosition: 'left'
+});
+
 const styles = StyleSheet.create({
     header: {
         paddingTop: 16

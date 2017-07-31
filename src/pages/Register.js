@@ -17,6 +17,7 @@ import Label from '../components/Label';
 import personIcon from '../images/personIcon.png';
 import passwordIcon from '../images/passwordIcon.png';
 //import router from '../../Router';
+import { BackHandler } from 'react-native';
 
 export default class Register extends Component {
   static navigationOptions = {
@@ -35,12 +36,18 @@ export default class Register extends Component {
    },
    headerTintColor: '#fefefe'
   }
+  componentDidMount() {
+    BackHandler.addEventListener('backPress');
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('backPress');
+  }
   validateEmail = (email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
   handlePress = () => {
-      alert(this.state.password);
+      //alert(this.state.password);
       if(this.validateEmail(this.state.email) && this.state.password){
         const data = {
          email: this.state.email,
@@ -58,9 +65,9 @@ export default class Register extends Component {
             password: this.state.password,
           })
         }).then(function(response){
-              alert(JSON.stringify(response.json()))
+              //alert(JSON.stringify(response.json()))
            }).then(() => {
-              alert('Success! You may now log in.');
+              //alert('Success! You may now log in.');
               this.props.navigation.navigate("defineCar");//Navigate to address screen
            }).catch((error) => {
              alert(error);
@@ -119,7 +126,7 @@ export default class Register extends Component {
 
 const styles = StyleSheet.create({
     scroll: {
-        backgroundColor: '#E1D7D8',
+        backgroundColor: '#ECECEC',
         padding: 30
     },
     alignRight: {

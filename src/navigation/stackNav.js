@@ -45,7 +45,7 @@ const stackNav = StackNavigator({
     defineCar: {
       screen: defineCar,
       navigationOptions:({navigation}) => ({
-          title: 'SPECIFY THE DETAILS OF YOUR VEHICLE',
+          title: 'VEHICLE DETAILS',
           headerStyle: { paddingRight: 10, paddingLeft: 10, backgroundColor: '#d73352' },
           headerTitleStyle: {
             color: 'white',
@@ -53,7 +53,7 @@ const stackNav = StackNavigator({
             fontWeight: 'bold',
             textAlign: 'center',
             alignSelf: 'center',
-            marginRight: 20
+            marginRight: 40
           },
           headerTintColor: '#ECECEC'
       })
