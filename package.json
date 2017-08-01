@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"body-parser": "^1.17.2",
+		"expo": "^19.0.1",
 		"express": "^4.15.3",
 		"moment": "^2.18.1",
 		"mongodb": "^1.4.4",
@@ -19,6 +20,9 @@
 		"react-native": "0.46.4",
 		"react-native-dropdown": "0.0.6",
 		"react-native-dropdown-android": "0.0.12",
+		"react-native-google-place-autocomplete": "^0.2.0",
+		"react-native-google-places": "^2.4.1",
+		"react-native-google-places-autocomplete": "^1.2.12",
 		"react-native-maps": "^0.15.3",
 		"react-native-material-design": "^0.3.7",
 		"react-native-material-design-styles": "^0.2.6",

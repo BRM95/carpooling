@@ -30,7 +30,6 @@ const CustomDrawerContentComponent = (props) => (
               <Text style={[styles.text, COLOR.paperGrey50, TYPO.paperFontSubhead]}>State Bank Carpooling</Text>
           </View>
       </Drawer.Header>
-
       <Drawer.Section
           items={[{
               icon: 'home',
@@ -39,7 +38,6 @@ const CustomDrawerContentComponent = (props) => (
               onLongPress: () => this.changeScene('welcome')
           }]}
       />
-
       <Drawer.Section
           title="Components"
           items={[{

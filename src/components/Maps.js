@@ -9,9 +9,15 @@ const Maps = (props) => {
    return (
       <MapView
          style = {styles.map}
-         showsUserLocation = {false}
-         followUserLocation = {false}
+         showsUserLocation = {true}
+         followUserLocation = {true}
          zoomEnabled = {true}
+         initialRegion={{
+           latitude: 40.77096,
+           longitude: -73.97702,
+           latitudeDelta: 0.0491,
+           longitudeDelta: 0.0375,
+         }}
       />
    )
 }

@@ -45,7 +45,7 @@ export default class Register extends Component {
   validateEmail = (email) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
-}
+  }
   handlePress = () => {
       //alert(this.state.password);
       if(this.validateEmail(this.state.email) && this.state.password){
@@ -60,15 +60,16 @@ export default class Register extends Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password,
-          })
+          body: json
         }).then(function(response){
               //alert(JSON.stringify(response.json()))
            }).then(() => {
               //alert('Success! You may now log in.');
-              this.props.navigation.navigate("defineCar");//Navigate to address screen
+              this.props.navigation.navigate("defineCar",
+              {
+                email: this.state.email,
+                password: this.state.password
+              });//Navigate to address screen
            }).catch((error) => {
              alert(error);
            }).done()

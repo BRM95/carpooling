@@ -11,7 +11,7 @@ import defineCar from '../pages/defineCar';
 
 const stackNav = StackNavigator({
     Main: {
-      screen: Login,
+      screen: passengerMap,
       navigationOptions:({navigation}) => ({
           title: 'LOGIN',
           headerStyle: { paddingRight: 10, paddingLeft: 10, backgroundColor: '#d73352' },

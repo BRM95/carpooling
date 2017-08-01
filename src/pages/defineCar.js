@@ -8,7 +8,8 @@ import {
   Image,
   TextInput,
   ScrollView,
-  Dimensions
+  Dimensions,
+  BackHandler
 } from 'react-native';
 
 import Container from '../components/Container';
@@ -16,12 +17,14 @@ import Button from '../components/Button';
 import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu';
 import carIcon from '../images/carIcon.png';
 import plateIcon from '../images/plateIcon.png';
-import { BackHandler } from 'react-native';
 
 export default class defineCar extends Component {
   constructor(props){
      super(props)
      this.state = {dropdownSelection: '-- Choose --'}
+     const {state} = this.props.navigation;
+     var emailNew = state.params ? state.params.email : "<undefined>"
+     var passwordNew = state.params ? state.params.password : "<undefined>"
   }
   componentDidMount() {
     BackHandler.addEventListener('backPress');
@@ -30,6 +33,41 @@ export default class defineCar extends Component {
   componentWillUnmount() {
     BackHandler.removeEventListener('backPress');
   }
+  handlePress = () => {
+      if(this.state.plate && this.state.model && this.state.dropdownSelection && this.state.dropdownSelection != '-- Choose --'){
+        const data = {
+         make: this.state.dropdownSelection,
+         model: this.state.model,
+         plate: this.state.plate
+        }
+        const json = JSON.stringify(data);
+        fetch('http://192.168.122.1:3000/register.json', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: json
+        }).then(function(response){
+              alert(JSON.stringify(response.json()))
+           }).then(() => {
+              alert('Success! You may now proceed to entering your address.');
+              this.props.navigation.navigate("passengerMap",
+              {
+                email: emailNew,
+                password: passwordNew,
+                make: this.state.dropdownSelection,
+                model: this.state.model,
+                plate: this.state.plate
+              });
+           }).catch((error) => {
+             alert(error);
+           }).done()
+      }else{
+        alert("Please enter the details correctly and try again");
+        alert(this.state.make);
+      }
+  }
   render() {
     return (
       <MenuContext style={{ flex: 1, backgroundColor: '#ECECEC' }}>
@@ -37,14 +75,14 @@ export default class defineCar extends Component {
             <Text style={styles.contentText}>
                 SELECT YOUR CAR MAKE BELOW
             </Text>
-            <Menu style={styles.dropdown} onSelect={(value) => this.setState({ dropdownSelection: value })}>
+            <Menu style={styles.dropdown} onSelect={(value) => this.setState({dropdownSelection: value})}>
               <View style={styles.iconWrap}>
                 <Image
                   source = {plateIcon}
                   style = {styles.icon}
                   resizeMode = "contain" />
               </View>
-              <MenuTrigger>
+              <MenuTrigger  onSelect={(value) => this.setState({dropdownSelection: value})}>
                 <Text>{this.state.dropdownSelection}</Text>
               </MenuTrigger>
               <MenuOptions optionsContainerStyle={styles.dropdownOptions}
@@ -75,6 +113,7 @@ export default class defineCar extends Component {
                   placeholder = "Model"
                   style={styles.textInput}
                   underlineColorAndroid="transparent"
+                  onChangeText={(text) => this.setState({model:text})}
               />
           </View>
           <View style={styles.inputWrap}>
@@ -88,6 +127,7 @@ export default class defineCar extends Component {
                   placeholder = "License Plate"
                   style={styles.textInput}
                   underlineColorAndroid="transparent"
+                  onChangeText={(text) => this.setState({plate:text})}
               />
           </View>
           <Container>
